@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type LoginFields, loginSchema } from "../../../../../../Projects/reactcf/untitled/cf7-react-crud/src/api/login.ts";
-import { Input } from "../../../../../../Projects/reactcf/untitled/cf7-react-crud/src/components/ui/input.tsx";
-import { Button } from "../../../../../../Projects/reactcf/untitled/cf7-react-crud/src/components/ui/button.tsx";
-import { Label } from "../../../../../../Projects/reactcf/untitled/cf7-react-crud/src/components/ui/label.tsx";
-import { useAuth } from "../../../../../../Projects/reactcf/untitled/cf7-react-crud/src/hooks/useAuth";
+import { type LoginFields, loginSchema } from "../api/login.ts";
+import { Input } from "../components/ui/input.tsx";
+import { Button } from "../components/ui/button.tsx";
+import { Label } from "../components/ui/label.tsx";
+import { useAuth } from "../hooks/useAuth.ts";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 
@@ -16,7 +16,7 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFields>({
+  } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
@@ -24,7 +24,7 @@ export default function LoginPage() {
     try {
       await loginUser(data);
       toast.success("Login successfully");
-      navigate("/products");
+      navigate("/books");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Login failed");
     }

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { AuthButton } from "@/components/AuthButton.tsx";
+import {AuthButton} from "./AuthButton.tsx";
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
