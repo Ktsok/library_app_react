@@ -25,11 +25,15 @@ export async function login({
   const form = new URLSearchParams();
   form.append("username", username);
   form.append("password", password);
+  let jsonObj: any = {};
+  form.forEach((value, key) => {
+    jsonObj[key] = value;
+  });
 
-  const res = await fetch(import.meta.env.VITE_API_URL + "login/access-token", {
+  const res = await fetch(import.meta.env.VITE_API_URL + "/api/auth/login", {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: form.toString(),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(jsonObj),
   });
   if (!res.ok) {
     let detail = "Login Failed.";
